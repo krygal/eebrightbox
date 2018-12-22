@@ -1,0 +1,46 @@
+<status>
+    <!-- REAL -->
+    <ssid_ssid type="array" value="[['EE%2Dabcdef'],
+    [''],
+    [''],
+    [''],
+    ['5GHz%2DEE%2Dabcdef'],
+    [''],
+    null]" />
+    <ssid_ssidEnable type="array" value="[['1'],
+    ['0'],
+    ['0'],
+    ['0'],
+    ['1'],
+    ['0'],
+    null]" />
+    <ssid_security type="array" value="[['2'],
+    ['2'],
+    ['2'],
+    ['2'],
+    ['2'],
+    ['2'],
+    null]" />
+    <ssid_wpaPassword type="array" value="[['three%2Dletter%2Dpassword'],
+    [''],
+    [''],
+    [''],
+    ['three%2Dletter%2Dpassword'],
+    [''],
+    null]" />
+    <ssid_ssidEnable type="array" value="[['1'],
+    ['0'],
+    ['0'],
+    ['0'],
+    ['1'],
+    ['0'],
+    null]" />
+    <ssid_broadcast type="array" value="[['1'],
+    ['1'],
+    ['1'],
+    ['1'],
+    ['0'],
+    ['1'],
+    null]" />
+    <!-- END_REAL -->
+</status>

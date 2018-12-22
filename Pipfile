@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+httpretty = "*"
+flake8 = "*"
+twine = "*"
+isort = "*"
+yapf = "*"
+autopep8 = "*"
+pylint = "*"
+pytest = "*"
+pytest-cov = "*"
+
+[packages]
+
+[requires]
+python_version = "3.6"

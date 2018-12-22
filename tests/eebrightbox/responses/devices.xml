@@ -1,0 +1,8 @@
+<status>
+    <!-- REAL -->
+    <deviceDB type="array" value="[
+        {mac:'10%3AAD%3AE1%3A2C%3A68%3AFE',hostname:'hostname1',ip:'192%2E168%2E1%2E111',ipv6:'',name:'name1',activity:'1',os:'Unknown',device:'Unknown',time_first_seen:'2018%2F12%2F09%2014%3A46%3A28',time_last_active:'2018%2F12%2F22%2014%3A26%3A03',dhcp_option:'NA',port:'wl1',ipv6_ll:'',activity_ip:'1',activity_ipv6_ll:'1',activity_ipv6:'0',device_oui:'NA',device_serial:'NA',device_class:'NA'},
+        {mac:'AB%3A72%3A21%3A33%3A11%3A59',hostname:'hostname2',ip:'192%2E168%2E1%2E222',ipv6:'',name:'name2',activity:'1',os:'Unknown',device:'Unknown',time_first_seen:'2018%2F12%2F09%2014%3A46%3A28',time_last_active:'2018%2F12%2F22%2014%3A26%3A03',dhcp_option:'NA',port:'wl1',ipv6_ll:'',activity_ip:'0',activity_ipv6_ll:'0',activity_ipv6:'0',device_oui:'NA',device_serial:'NA',device_class:'NA'},
+        null]" />
+    <!-- END_REAL -->
+</status>
