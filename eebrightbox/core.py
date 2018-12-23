@@ -11,11 +11,12 @@ import requests
 
 from .errors import AuthenticationException
 from .errors import EEBrightBoxException
-from .helpers import parse_to_boolean
-from .helpers import parse_to_integer
-from .helpers import parse_to_string
 from .helpers import parse_device_db
 from .helpers import parse_ssid_value
+from .helpers import parse_to_boolean
+from .helpers import parse_to_datetime
+from .helpers import parse_to_integer
+from .helpers import parse_to_string
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -51,7 +52,7 @@ class EEBrightBox:
 
     def authenticate(self):
         """
-        Authenticates using username and password.
+        Authenticate using username and password.
 
         :returns: True/False
         """
@@ -89,7 +90,7 @@ class EEBrightBox:
 
     def forget(self):
         """
-        Performs logout and removes cookies.
+        Perform logout and removes cookies.
         """
         _LOGGER.debug("Logging out")
 
@@ -98,35 +99,67 @@ class EEBrightBox:
 
         self.cookies = {}
 
+    def get_devices(self):
+        """
+        Retrieve list of devices (ever) recorded by the router.
+
+        :returns: List of dicts with following keys:
+            - mac - XX:XX:XX:XX:XX:XX format
+            - hostname
+            - port - wl0, wl1, eth0/1/2/3
+            - ip - xxx.xxx.xxx.xxx format
+            - ipv6
+            - ipv6_11
+            - time_first_seen - Datetime
+            - time_last_active - Datetime
+            - activity_ip - True/False
+            - activity_ipv6 - True/False
+            - activity_ipv6_11 - True/False
+            - dhcp_option - likely None
+            - name - usually matches hostname or 'Unknown'+mac format
+            - os - likely None
+            - device - likely None
+            - device_oui - likely None
+            - device_serial - likely None
+            - device_class - likely None
+        :raises: AuthenticationException if not authenticated
+        """
+        devices = self._get_devices()
+
+        _LOGGER.debug('Devices %s', devices)
+
+        return devices
+
     def get_active_devices(self):
         """
-        Retrieves list of active devices connected to router.
+        Retrieve list of active devices connected to router.
 
         Activity is determined using activity_ip flag.
 
         :returns: List of dicts with following keys:
-            - mac
+            - mac - XX:XX:XX:XX:XX:XX format
             - hostname
-            - ip
-            - ipv6
-            - name - usually matches hostname or 'Unknown'+mac format
-            - os - likely 'Unknown'
-            - device - likely 'Unknown'
-            - time_first_seen - YYYY/MM/DD HH:mm:ss
-            - time_last_active - YYYY/MM/DD HH:mm:ss
-            - dhcp_option - likely NA
             - port - wl0, wl1, eth0/1/2/3
+            - ip - xxx.xxx.xxx.xxx format
+            - ipv6
             - ipv6_11
-            - activity_ip - 0/1
-            - activity_ipv6_11 - 0/1
-            - activity_ipv6 - 0/1
-            - device_oui - likely NA
-            - device_serial - likely NA
-            - device_class - likely NA
+            - time_first_seen - Datetime
+            - time_last_active - Datetime
+            - activity - True/False
+            - activity_ip - True/False
+            - activity_ipv6 - True/False
+            - activity_ipv6_11 - True/False
+            - dhcp_option - likely None
+            - name - usually matches hostname or 'Unknown'+mac format
+            - os - likely None
+            - device - likely None
+            - device_oui - likely None
+            - device_serial - likely None
+            - device_class - likely None
         :raises: AuthenticationException if not authenticated
         """
         devices = self._get_devices()
-        active_devices = [d for d in devices if 'activity_ip' in d and str(d['activity_ip']) == '1']
+        active_devices = [d for d in devices if d['activity_ip']]
 
         _LOGGER.debug('Active devices %s', active_devices)
 
@@ -134,6 +167,7 @@ class EEBrightBox:
 
     def get_ssids(self):
         """
+
         :returns: List of dicts with following keys:
             - ssid
             - enabled - True/False
@@ -163,7 +197,51 @@ class EEBrightBox:
                 except IndexError:
                     ssids.append({friendly_name: convert_function(entry)})
 
-        return [s for s in ssids if s['ssid'] != '']
+        return [s for s in ssids if s['ssid'] is not None]
+
+    def _get_devices(self):
+        """
+        :returns: List
+        """
+        _LOGGER.debug("Getting devices")
+
+        # parse XML and retrieve deviceDB node
+        root = self._get_status_conn_xml()
+        device_db = root.find('deviceDB').get('value')
+
+        # node value is almost-JSON
+        devices = parse_device_db(device_db)
+
+        device_configs = [
+            ('mac', 'mac', parse_to_string),
+            ('hostname', 'hostname', parse_to_string),
+            ('port', 'port', parse_to_string),
+            ('ip', 'ip', parse_to_string),
+            ('ipv6', 'ipv6', parse_to_string),
+            ('ipv6_ll', 'ipv6_ll', parse_to_string),
+            ('time_first_seen', 'time_first_seen', parse_to_datetime),
+            ('time_last_active', 'time_last_active', parse_to_datetime),
+            ('activity', 'activity', parse_to_boolean),
+            ('activity_ip', 'activity_ip', parse_to_boolean),
+            ('activity_ipv6', 'activity_ipv6', parse_to_boolean),
+            ('activity_ipv6_ll', 'activity_ipv6_ll', parse_to_boolean),
+            ('dhcp_option', 'dhcp_option', parse_to_string),
+            ('name', 'name', parse_to_string),
+            ('os', 'os', parse_to_string),
+            ('device', 'device', parse_to_string),
+            ('device_oui', 'device_oui', parse_to_string),
+            ('device_serial', 'device_serial', parse_to_string),
+            ('device_class', 'device_class', parse_to_string),
+        ]
+
+        cleaned_devices = []
+        for device in devices:
+            clean_device = {}
+            for name, friendly_name, convert_function in device_configs:
+                clean_device[friendly_name] = convert_function(device[name])
+            cleaned_devices.append(clean_device)
+
+        return cleaned_devices
 
     def _get_status_conn_xml(self):
         """
@@ -182,16 +260,3 @@ class EEBrightBox:
             _LOGGER.error("Status failed %s", endpoint, exc_info=1)
 
         return None
-
-    def _get_devices(self):
-        """
-        :returns: List
-        """
-        _LOGGER.debug("Getting devices")
-
-        # parse XML and retrieve deviceDB node
-        root = self._get_status_conn_xml()
-        device_db = root.find('deviceDB').get('value')
-
-        # node value is almost-JSON
-        return parse_device_db(device_db)

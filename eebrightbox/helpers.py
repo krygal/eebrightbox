@@ -2,6 +2,7 @@
 Helpers.
 """
 
+import datetime
 import re
 import urllib.parse
 
@@ -10,14 +11,14 @@ def parse_to_string(val):
     """
     Convert value to string.
     """
-    return str(val)
+    return parse_to_none(str(val))
 
 
 def parse_to_integer(val):
     """
     Convert value to integer.
     """
-    return int(val)
+    return parse_to_none(int(val))
 
 
 def parse_to_boolean(val):
@@ -25,6 +26,26 @@ def parse_to_boolean(val):
     Convert value to boolean.
     """
     return val in [True, 'True', 'true', 1, '1', 'Yes', 'yes']
+
+
+def parse_to_datetime(val):
+    """
+    Convert value to date in YYYY/MM/DD hh:mm:ss format.
+    """
+    try:
+        return datetime.datetime.strptime(val, '%Y/%m/%d %H:%M:%S')
+    except ValueError:
+        return parse_to_none(val)
+
+
+def parse_to_none(val):
+    """
+    Convert value to None if match, pass otherwise.
+    """
+    if val in ['Unknown', 'NA', '']:
+        return None
+
+    return val
 
 
 def parse_device_db(device_db):

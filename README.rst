@@ -9,13 +9,11 @@ Connector for EE BrightBox routers.
    :target: ./LICENSE
    :alt: MIT licensed
 
+
 Compatibility
 -------
 
  - python 3.6
-
-
-
 
 
 Example
@@ -37,7 +35,8 @@ Example
         ssids = ee.get_ssids()
 
         print(active_devices)
-        # Output: [{'mac': '34:FC:EF:...', 'hostname': 'android-...', 'ip': '192.168.1.xxx', 'ipv6': '', 'name': 'android-...', 'activity': '1', 'os': 'Unknown', 'device': 'Unknown', 'time_first_seen': '2018/12/01 00:00:00', 'time_last_active': '2018/12/02 00:00:00', 'dhcp_option': 'NA', 'port': 'wl1', 'ipv6_ll': 'fe80::36fc:...', 'activity_ip': '1', 'activity_ipv6_ll': '1', 'activity_ipv6': '0', 'device_oui': 'NA', 'device_serial': 'NA', 'device_class': 'NA'}, ...]
+        # Output: [{'mac': '10:AD:E1:2C:68:FE', 'hostname': 'hostname1', 'port': 'wl1', 'ip': '192.168.1.111', 'ipv6': None, 'ipv6_ll': None, 'time_first_seen': datetime.datetime(2018, 12, 9, 14, 46, 28), 'time_last_active': datetime.datetime(2018, 12, 22, 14, 26, 3), 'activity': True, 'activity_ip': True, 'activity_ipv6': False, 'activity_ipv6_ll': True, 'dhcp_option': None, 'name': 'name1', 'os': None, 'device': None, 'device_oui': None, 'device_serial': None, 'device_class': None}, ...]
+
 
         print(ssids)
         # Output: [{'ssid': 'EE-abcdef', 'enabled': True, 'security': 2, 'password': 'three-word-password', 'broadcast': True}, {'ssid': '5GHz-EE-abcdef', 'enabled': True, 'security': 2, 'password': 'three-word-password', 'broadcast': True}]

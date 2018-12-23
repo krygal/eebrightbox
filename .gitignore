@@ -1,6 +1,17 @@
+# build
 *.pyc
 __pycache__
-.coverage
-htmlcov
 *.egg*
 *.egg-info
+build/
+dist/
+
+
+# test
+.coverage
+htmlcov
+
+
+# pbr
+ChangeLog
+AUTHORS

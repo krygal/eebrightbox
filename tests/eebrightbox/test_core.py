@@ -1,3 +1,4 @@
+import datetime
 import os
 import unittest
 
@@ -77,6 +78,44 @@ class TestEEBrightbox(unittest.TestCase):
         self.assertRaises(AuthenticationException, run)
 
     @httpretty.activate
+    def test_get_devices(self):
+        self._httpretty_register()
+
+        httpretty.register_uri(
+            httpretty.GET,
+            'http://192.168.1.1/status_conn.xml',
+            body=self._get_response('devices.xml'))
+
+        devices = []
+        with EEBrightBox(self.config) as ee:
+            devices = ee.get_devices()
+
+        expected_device = {
+            'mac': '10:AD:E1:2C:68:FE',
+            'hostname': 'hostname1',
+            'port': 'wl1',
+            'ip': '192.168.1.111',
+            'ipv6': None,
+            'ipv6_ll': None,
+            'time_first_seen': datetime.datetime(2018, 12, 9, 14, 46, 28),
+            'time_last_active': datetime.datetime(2018, 12, 22, 14, 26, 3),
+            'activity': True,
+            'activity_ip': True,
+            'activity_ipv6': False,
+            'activity_ipv6_ll': True,
+            'dhcp_option': None,
+            'name': 'name1',
+            'os': None,
+            'device': None,
+            'device_oui': None,
+            'device_serial': None,
+            'device_class': None,
+        }
+
+        self.assertEqual([d['mac'] for d in devices], ['10:AD:E1:2C:68:FE', 'AB:72:21:33:11:59'])
+        self.assertEqual(devices[0], expected_device)
+
+    @httpretty.activate
     def test_get_active_devices(self):
         self._httpretty_register()
 
@@ -89,9 +128,7 @@ class TestEEBrightbox(unittest.TestCase):
         with EEBrightBox(self.config) as ee:
             devices = ee.get_active_devices()
 
-        self.assertEqual(len(devices), 1)
-        self.assertEqual(devices[0]['mac'], '10:AD:E1:2C:68:FE')
-        self.assertEqual(devices[0]['ip'], '192.168.1.111')
+        self.assertEqual([d['mac'] for d in devices], ['10:AD:E1:2C:68:FE'])
 
     @httpretty.activate
     def test_get_ssids(self):
