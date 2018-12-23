@@ -3,17 +3,21 @@ EEBrightBox (unstable)
 
 Connector for EE BrightBox routers.
 
-.. image:: https://travis-ci.org/krygal/eebrightbox.svg?branch=master
+.. image:: https://img.shields.io/travis/krygal/eebrightbox/master.svg
     :target: https://travis-ci.org/krygal/eebrightbox
-.. image:: https://img.shields.io/badge/license-MIT-blue.svg
-   :target: ./LICENSE
-   :alt: MIT licensed
+.. image:: https://img.shields.io/librariesio/github/krygal/eebrightbox.svg
+.. image:: https://img.shields.io/pypi/v/eebrightbox.svg
+    :target: https://pypi.org/project/eebrightbox/
+.. image:: https://img.shields.io/pypi/pyversions/eebrightbox.svg
+.. image:: https://img.shields.io/pypi/l/eebrightbox.svg
 
 
-Compatibility
--------
+Installation
+-------------
 
- - python 3.6
+ .. code:: bash
+
+    pip install eebrightbox
 
 
 Example
@@ -37,13 +41,14 @@ Example
         print(active_devices)
         # Output: [{'mac': '10:AD:E1:2C:68:FE', 'hostname': 'hostname1', 'port': 'wl1', 'ip': '192.168.1.111', 'ipv6': None, 'ipv6_ll': None, 'time_first_seen': datetime.datetime(2018, 12, 9, 14, 46, 28), 'time_last_active': datetime.datetime(2018, 12, 22, 14, 26, 3), 'activity': True, 'activity_ip': True, 'activity_ipv6': False, 'activity_ipv6_ll': True, 'dhcp_option': None, 'name': 'name1', 'os': None, 'device': None, 'device_oui': None, 'device_serial': None, 'device_class': None}, ...]
 
-
         print(ssids)
         # Output: [{'ssid': 'EE-abcdef', 'enabled': True, 'security': 2, 'password': 'three-word-password', 'broadcast': True}, {'ssid': '5GHz-EE-abcdef', 'enabled': True, 'security': 2, 'password': 'three-word-password', 'broadcast': True}]
 
 
 License
 -------
+
+MIT License
 
 Copyright (c) 2018 Krystian Galutowski
 
