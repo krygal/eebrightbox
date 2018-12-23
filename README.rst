@@ -6,6 +6,10 @@ Connector for EE BrightBox routers.
 .. image:: https://img.shields.io/travis/krygal/eebrightbox/master.svg
     :target: https://travis-ci.org/krygal/eebrightbox
 .. image:: https://img.shields.io/librariesio/github/krygal/eebrightbox.svg
+.. image:: https://img.shields.io/codeclimate/maintainability-percentage/krygal/eebrightbox.svg
+    :target: https://codeclimate.com/github/krygal/eebrightbox
+.. image:: https://img.shields.io/codeclimate/coverage/krygal/eebrightbox.svg
+    :target: https://codeclimate.com/github/krygal/eebrightbox
 .. image:: https://img.shields.io/pypi/v/eebrightbox.svg
     :target: https://pypi.org/project/eebrightbox/
 .. image:: https://img.shields.io/pypi/pyversions/eebrightbox.svg

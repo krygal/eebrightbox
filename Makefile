@@ -53,7 +53,7 @@ test-verbose:
 	pipenv run pytest -s
 
 test-coverage:
-	pipenv run py.test -v --cov $(MODULE) --cov-report term-missing --cov-report html
+	pipenv run py.test -v --cov $(MODULE) --cov-report term-missing --cov-report html --cov-report xml:coverage.xml
 
 dists: requirements sdist bdist wheels
 

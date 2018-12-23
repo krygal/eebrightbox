@@ -10,6 +10,8 @@ dist/
 # test
 .coverage
 htmlcov
+coverage.xml
+cc-test-reporter
 
 
 # pbr
