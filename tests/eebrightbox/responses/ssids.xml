@@ -21,11 +21,11 @@
     ['2'],
     ['2'],
     null]" />
-    <ssid_wpaPassword type="array" value="[['three%2Dletter%2Dpassword'],
+    <ssid_wpaPassword type="array" value="[['three%2Dword%2Dpassword'],
     [''],
     [''],
     [''],
-    ['three%2Dletter%2Dpassword'],
+    ['three%2Dword%2Dpassword'],
     [''],
     null]" />
     <ssid_ssidEnable type="array" value="[['1'],

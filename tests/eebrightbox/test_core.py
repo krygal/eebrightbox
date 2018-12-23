@@ -110,11 +110,11 @@ class TestEEBrightbox(unittest.TestCase):
         self.assertEqual(ssid[0]['ssid'], 'EE-abcdef')
         self.assertEqual(ssid[0]['enabled'], True)
         self.assertEqual(ssid[0]['security'], 2)
-        self.assertEqual(ssid[0]['password'], 'three-letter-password')
+        self.assertEqual(ssid[0]['password'], 'three-word-password')
         self.assertEqual(ssid[0]['broadcast'], True)
 
         self.assertEqual(ssid[1]['ssid'], '5GHz-EE-abcdef')
         self.assertEqual(ssid[1]['enabled'], True)
         self.assertEqual(ssid[1]['security'], 2)
-        self.assertEqual(ssid[1]['password'], 'three-letter-password')
+        self.assertEqual(ssid[1]['password'], 'three-word-password')
         self.assertEqual(ssid[1]['broadcast'], False)
