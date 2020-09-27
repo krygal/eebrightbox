@@ -5,7 +5,7 @@ MODULE:=eebrightbox
 all: ensure-pip dev style checks dists test
 
 ensure-pip:
-	pip install --user --upgrade pipenv pip
+	pip install --upgrade pipenv pip
 	pip --version
 	pipenv --version
 
@@ -25,7 +25,7 @@ dev-ci:
 style: isort autopep8 yapf
 
 isort:
-	pipenv run isort -y
+	pipenv run isort
 
 autopep8:
 	pipenv run autopep8 --in-place --recursive setup.py $(MODULE)
