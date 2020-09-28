@@ -6,10 +6,18 @@ Exceptions definitions.
 class EEBrightBoxException(Exception):
     """
     Generic exception.
+
+    Deprecated, use EERouterException instead
     """
 
 
-class AuthenticationException(EEBrightBoxException):
+class EERouterException(EEBrightBoxException):
+    """
+    Generic exception.
+    """
+
+
+class AuthenticationException(EERouterException):
     """
     Authentication exception.
     """

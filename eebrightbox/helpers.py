@@ -83,3 +83,61 @@ def parse_ssid_value(ssid_value):
         ssid.append(urllib.parse.unquote(ssid_item))
 
     return ssid
+
+
+def clean(configs, data):
+    """
+    Cleans data (array of dicts) using configuration of parse functions
+    """
+    clean_data = []
+    for item in data:
+        clean_item = {}
+        for name, friendly_name, convert_function in configs:
+            clean_item[friendly_name] = convert_function(item[name])
+        clean_data.append(clean_item)
+
+    return clean_data
+
+
+def clean_devices(devices):
+    """
+    Specific implementation to clean devices data.
+    """
+    device_configs = [
+        ('mac', 'mac', parse_to_string),
+        ('hostname', 'hostname', parse_to_string),
+        ('port', 'port', parse_to_string),
+        ('ip', 'ip', parse_to_string),
+        ('ipv6', 'ipv6', parse_to_string),
+        ('ipv6_ll', 'ipv6_ll', parse_to_string),
+        ('time_first_seen', 'time_first_seen', parse_to_datetime),
+        ('time_last_active', 'time_last_active', parse_to_datetime),
+        ('activity', 'activity', parse_to_boolean),
+        ('activity_ip', 'activity_ip', parse_to_boolean),
+        ('activity_ipv6', 'activity_ipv6', parse_to_boolean),
+        ('activity_ipv6_ll', 'activity_ipv6_ll', parse_to_boolean),
+        ('dhcp_option', 'dhcp_option', parse_to_string),
+        ('name', 'name', parse_to_string),
+        ('os', 'os', parse_to_string),
+        ('device', 'device', parse_to_string),
+        ('device_oui', 'device_oui', parse_to_string),
+        ('device_serial', 'device_serial', parse_to_string),
+        ('device_class', 'device_class', parse_to_string),
+    ]
+
+    return clean(device_configs, devices)
+
+
+def clean_ssids(ssids):
+    """
+    Specific implementation to clean ssids data.
+    """
+    ssid_configs = [
+        ('ssid_ssid', 'ssid', parse_to_string),
+        ('ssid_ssidEnable', 'enabled', parse_to_boolean),
+        ('ssid_security', 'security', parse_to_integer),
+        ('ssid_wpaPassword', 'password', parse_to_string),
+        ('ssid_broadcast', 'broadcast', parse_to_boolean),
+    ]
+
+    return clean(ssid_configs, ssids)
