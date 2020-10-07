@@ -63,7 +63,7 @@ class TestEESmartHub(unittest.TestCase):
             'device_class': None,
         }
 
-        self.assertEqual([d['mac'] for d in devices], ['10:AD:E1:2C:68:FE', 'AB:72:21:33:11:59'])
+        self.assertEqual([d['mac'] for d in devices], ['10:AD:E1:2C:68:FE', 'AB:72:21:33:11:59', '8A:A4:E4:5B:7B:16', '82:E7:A3:6C:7B:1A', 'F0:8A:76:0A:7C:DA'])
         self.assertEqual(devices[0], expected_device)
 
     @httpretty.activate
@@ -77,4 +77,4 @@ class TestEESmartHub(unittest.TestCase):
         with EESmartHub(self.config) as ee:
             devices = ee.get_active_devices()
 
-        self.assertEqual([d['mac'] for d in devices], ['10:AD:E1:2C:68:FE'])
+        self.assertEqual([d['mac'] for d in devices], ['10:AD:E1:2C:68:FE', 'F0:8A:76:0A:7C:DA'])

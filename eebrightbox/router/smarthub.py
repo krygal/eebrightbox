@@ -11,7 +11,7 @@ from calmjs.parse.asttypes import Object, VarDecl, Assign
 from calmjs.parse.walkers import Walker
 
 from . import EERouter
-from ..helpers import clean_devices
+from ..helpers import clean_devices, split_multimac
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -33,7 +33,7 @@ class EESmartHub(EERouter):
 
         devices = self._request()
 
-        return clean_devices(devices)
+        return clean_devices(split_multimac(devices))
 
     def _request(self):
         """

@@ -141,3 +141,31 @@ def clean_ssids(ssids):
     ]
 
     return clean(ssid_configs, ssids)
+
+
+def split_multimac(devices):
+    """
+    Router can group device that uses dynamic mac addresses into a single device.
+
+    This function splits them into separate items.
+    """
+    split_devices = []
+
+    for device in devices:
+        if ',' not in device['mac']:
+            split_devices.append(device)
+            continue
+
+        split_ds = [device.copy() for i in range(len(device['mac'].split(',')))]
+        for key, val in device.items():
+            if ',' not in val or key not in ('mac', 'activity_ip', 'activity_ipv6', 'activity_ipv6_ll', 'ip', 'port'):
+                continue
+
+            for i, split_val in enumerate(val.split(',')):
+                split_ds[i][key] = split_val
+
+        for split_d in split_ds:
+            split_d['activity'] = split_d['activity_ip']
+            split_devices.append(split_d)
+
+    return split_devices
