@@ -2,6 +2,7 @@ addCfg("sync2G",157745158,'0');
 
 var known_device_list=[{mac:'10%3AAD%3AE1%3A2C%3A68%3AFE',hostname:'hostname1',ip:'192%2E168%2E1%2E111',ipv6:'',name:'name1',activity:'1',os:'Unknown',device:'Unknown',time_first_seen:'2018%2F12%2F09%2014%3A46%3A28',time_last_active:'2018%2F12%2F22%2014%3A26%3A03',dhcp_option:'NA',port:'wl1',ipv6_ll:'',activity_ip:'1',activity_ipv6_ll:'1',activity_ipv6:'0',device_oui:'NA',device_serial:'NA',device_class:'NA',reconnected:'0'},
 {mac:'AB%3A72%3A21%3A33%3A11%3A59',hostname:'hostname2',ip:'192%2E168%2E1%2E222',ipv6:'',name:'name2',activity:'0',os:'Unknown',device:'Unknown',time_first_seen:'2018%2F12%2F09%2014%3A46%3A28',time_last_active:'2018%2F12%2F22%2014%3A26%3A03',dhcp_option:'NA',port:'wl1',ipv6_ll:'',activity_ip:'0%2C1',activity_ipv6_ll:'0',activity_ipv6:'0',device_oui:'NA',device_serial:'NA',device_class:'NA',reconnected:'0'},
+{mac:'8A%3AA4%3AE4%3A5B%3A7B%3A16%2C82%3AE7%3AA3%3A6C%3A7B%3A1A%2CF0%3A8A%3A76%3A0A%3A7C%3ADA',hostname:'hostname3',ip:'192%2E168%2E1%2E242%2C192%2E168%2E1%2E91%2C192%2E168%2E1%2E214',ipv6:'',name:'name3',activity:'1',os:'Unknown',device:'Unknown',time_first_seen:'2018%2F12%2F09%2014%3A46%3A28',time_last_active:'2018%2F12%2F22%2014%3A26%3A03',dhcp_option:'NA',port:'ath1%2Cath0%2Cath0',ipv6_ll:'',activity_ip:'0%2C0%2C1',activity_ipv6_ll:'0%2C0%2C1',activity_ipv6:'0%2C0%2C0',device_oui:'NA',device_serial:'NA',device_class:'NA',reconnected:'0'},
 null];
 var rate = [];
 addCfg("known_devices_update",3775660033,'');
